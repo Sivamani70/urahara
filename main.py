@@ -11,16 +11,33 @@ def eprint(*args, **kwargs):
 
 
 class Main:
+    VALID_EXTENSIONS = ('.png', '.jpg', '.jpeg', '.bmp', '.gif')
     url: set[str] = set()
+    file_path: list[str] = []
 
-    def __init__(self, file_path: list):
-        self.file_path = [path for path in file_path if os.path.exists(path)]
+    def __init__(self, file_path: list[str]):
         if os.name == 'nt':
             os.system('cls')
         else:
             os.system('clear')
 
+        for path in file_path:
+            if os.path.exists(path):
+                extension = os.path.splitext(path)[1].lower()
+                if extension in self.VALID_EXTENSIONS:
+                    self.file_path.append(path)
+                else:
+                    eprint(
+                        f"Error: Wrong extension skipped {path} as it is not a supported image file type.")
+            else:
+                eprint(
+                    f"Warning: Skipping '{path}' as the file does not exist.")
+
     def process(self):
+
+        if len(self.file_path) == 0:
+            eprint("Warning: No files to process")
+            sys.exit(0)
 
         print("Processing files:")
         print("---------------------")
