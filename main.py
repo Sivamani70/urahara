@@ -44,12 +44,12 @@ class Main:
                         self.extract_url(qr_data)
 
     def extract_url(self, data: str):
-        pattern: str = r'\b(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,."]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,."])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,."]*\)|[A-Z0-9+&@#\/%=~_|$"])'
-        uri: list[str] = re.findall(pattern, data, re.IGNORECASE)
+        pattern = r'\b(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,."]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,."])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,."]*\)|[A-Z0-9+&@#\/%=~_|$"])'
+        uri = re.findall(pattern, data, re.IGNORECASE)
         for i in uri:
             self.url.add(i)
 
-    def flat_json(self, obj: dict | list):
+    def flat_json(self, obj: dict | list | str):
         if isinstance(obj, dict):
             for v in obj.values():
                 self.flat_json(v)
