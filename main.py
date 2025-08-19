@@ -11,7 +11,7 @@ def eprint(*args, **kwargs):
 
 
 class Main:
-    url: list[str] = []
+    url: set[str] = set()
 
     def __init__(self, file_path: list):
         self.file_path = [path for path in file_path if os.path.exists(path)]
@@ -44,9 +44,10 @@ class Main:
                         self.extract_url(qr_data)
 
     def extract_url(self, data: str):
-        pattern = r'\b(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,."]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,."])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,."]*\)|[A-Z0-9+&@#\/%=~_|$"])'
-        uri = re.findall(pattern, data, re.IGNORECASE)
-        self.url.extend(uri)
+        pattern: str = r'\b(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,."]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,."])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,."]*\)|[A-Z0-9+&@#\/%=~_|$"])'
+        uri: list[str] = re.findall(pattern, data, re.IGNORECASE)
+        for i in uri:
+            self.url.add(i)
 
     def flat_json(self, obj: dict | list):
         if isinstance(obj, dict):
