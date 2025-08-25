@@ -113,9 +113,9 @@ The current development status of the project is outlined below, detailing both 
 
 **Phase 2: Automated Analysis and Documentation**
 
-[ ] Work in progress: Integration with the VirusTotal API.
+[x] Completed: Integration with the VirusTotal API.
 
-[ ] Work in progress: Automated capture of VirusTotal report screenshots.
+[x] Completed: Automated capture of VirusTotal report screenshots.
 
 [ ] Work in progress: Automated generation of RCA documentation.
 
