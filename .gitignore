@@ -1,6 +1,8 @@
 **/*.jpg
 **/*.png
 **/*.jpeg
-venv
+**/*.docx
+**/*.doc
 *.json
 __pycache__/
+venv

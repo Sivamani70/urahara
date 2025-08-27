@@ -3,10 +3,22 @@ from logger.log import CustomLogger
 
 
 class VTReport:
+    """
+    This class is designed to interact with the VirusTotal API. It handles
+    the submission of URLs for analysis and the retrieval of detailed
+    analysis reports, which include a reputation score.
+    """
     URL_END_POINT: str = "https://www.virustotal.com/api/v3/urls"
     ANALYSIS_ENDPOINT: str = "https://www.virustotal.com/api/v3/analyses/"
 
     def __init__(self, urls: set[str], api_key: str):
+        """
+        Initializes the VTReport instance.
+
+        Args:
+            urls (set[str]): A set of unique URLs to be submitted for analysis.
+            api_key (str): The API key for authenticating with the VirusTotal API.
+        """
         self._logger = CustomLogger()
         self.urls = urls
         self.session = requests.Session()
@@ -16,6 +28,12 @@ class VTReport:
         })
 
     def _submit(self) -> list[str]:
+        """
+        Submits each URL to the VirusTotal API for analysis.
+
+        Returns:
+            list[str]: A list of analysis IDs for each submitted URL.
+        """
         ids: list[str] = []
         post_headers = {"content-type": "application/x-www-form-urlencoded"}
 
@@ -37,6 +55,14 @@ class VTReport:
         return ids
 
     def analysis_reports(self) -> list[dict[str, str]]:
+        """
+        Retrieves the analysis reports for each submitted URL using their IDs.
+        It parses the response to extract relevant data, including the reputation score.
+
+        Returns:
+            list[dict[str, str]]: A list of dictionaries, each containing
+            the URL, its ID, and the final reputation score.
+        """
         analysis_data: list[dict[str, str]] = []
         ids: list[str] = self._submit()
         try:
