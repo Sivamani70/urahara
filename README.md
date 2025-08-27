@@ -165,7 +165,7 @@ The current development status of the project is outlined below, detailing both 
 
 [x] Completed: Automated capture of VirusTotal report screenshots.
 
-[x] Work in progress: Automated generation of RCA documentation.
+[x] Completed: Automated generation of RCA documentation.
 
 ## 🤝 Contributing
 
